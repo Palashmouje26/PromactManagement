@@ -13,6 +13,7 @@ namespace PromactManagement.DomainModel.Models.CompanyRagistrationDto
         public int ComapnyId { get; set; }
         public string CompanyName { get; set; }
         public string CompanyOwner { get; set; }
+
         public int OrganizationId { get; set; }
 
         public PartnerLevelType PartnerLevel { get; set; }

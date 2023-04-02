@@ -9,34 +9,34 @@ using System.Threading.Tasks;
 
 namespace PromactManagement.Repository.OrganizationModuleRagistration
 {
-    public interface IOrganizationModuleRagistration
+    public interface IOrganizationRegistration
     {
         /// <summary>
-        /// Add New organization Details
+        /// Add New organization Details.
         /// </summary>
-        /// <param name="organization">Add New organization or ragesterd in Stors</param>
+        /// <param name="organization">Add New organization or registration in Database</param>
         /// <returns> return object</returns>
         Task<OrganizationModelDto> CreateRagistrationAsync(OrganizationModelDto organization);
 
         /// <summary>
-        /// Fetch the AllUser details 
+        /// Fetch the All Organization details.
         /// </summary>
         /// <returns>Fetch the details from the database</returns>
-        Task<List<OrganizationListDto>> GetAllUserAsync();
+        Task<List<OrganizationListDto>> GetAllOrganizationDetailAsync();
 
         /// <summary>
-        /// Fetch the organization details with  Id
+        /// Fetch the organization details with  Id.
         /// </summary>
-        /// <param name="UserId">Get perticlar organization deatails in the stores</param>
+        /// <param name="Id">Get perticlar organization deatails by Id</param>
         /// <returns> Fetch the details from the database</returns>
-        Task<OrganizationListDto> GetUserByIdAsync(int UserId);
+        Task<OrganizationListDto> GetOrganizationDetailByIdAsync(int Id);
 
         /// <summary>
-        /// 
+        /// Updating the organization details.
         /// </summary>
-        /// <param name="User"></param>
-        /// <returns></returns>
-        Task<OrganizationModelDto> UpdateUserAsync(OrganizationModelDto User);
+        /// <param name="organizationDetail">Organization detail to update.</param>
+        /// <returns>Updated organization detail.</returns>
+        Task<OrganizationModelDto> UpdateOrganizationDetailAsync(OrganizationModelDto organizationDetail);
 
     }
 }

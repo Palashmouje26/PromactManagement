@@ -11,6 +11,6 @@ namespace PromactManagement.DomainModel.DbContexts
 
         }
         public DbSet<OrganizationModel> organizationModules { get; set; }
-        public DbSet<CompanyModelRagistration> companyModules { get; set; }
+        public DbSet<CompanyModelRegistration> companyModules { get; set; }
     }
 }

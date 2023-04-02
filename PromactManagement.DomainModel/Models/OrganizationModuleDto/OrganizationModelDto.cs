@@ -33,7 +33,7 @@ namespace PromactManagement.DomainModel.Models.OrganizationModuleDetail
 
         public bool UseOverrides { get; set; }
 
-       // [RegularExpression(@"^([0-9]{6})$", ErrorMessage = "please enter in year formate")]
+      
         public string AUAOverride { get; set; }
         public string VCOverride { get; set; }
         public string CostsLastQuarter { get; set; }

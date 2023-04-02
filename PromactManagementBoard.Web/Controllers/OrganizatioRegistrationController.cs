@@ -9,14 +9,14 @@ namespace PromactManagement.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrganizationModuleRagistrationController : ControllerBase
+    public class OrganizatioRegistrationController : ControllerBase
     {
         #region private Member
-        private readonly IOrganizationModuleRagistration _organizationModule;
+        private readonly IOrganizationRegistration _organizationModule;
         #endregion
 
         #region Constructor
-        public OrganizationModuleRagistrationController(IOrganizationModuleRagistration organizationModule)
+        public OrganizatioRegistrationController(IOrganizationRegistration organizationModule)
         {
             _organizationModule = organizationModule;
         }
@@ -24,32 +24,32 @@ namespace PromactManagement.Web.Controllers
 
         #region public Methods
         /**
-       * @api {get} /api/organizationModule /:get all organization information
+       * @api {get} /api/OrganizatioRegistrationController /:get all organization information
        * @apiName GetOrganizationAsync
        * @apiGroup OrganizationModelRagistration
        * 
-       * @apiSuccess {String} UserName Username of the User.
+       * @apiSuccess : List Of registerd organization details.
        * 
        * @apiSuccessExample Success-Response:{object[]}   
        * @apiError OrganizationNotFound The information of the User was not found.
        */
-        [HttpGet("getorganization")]
+        [HttpGet("organization")]
         public async Task<IActionResult> GetOrganizationAsync()
         {
-            return Ok(await _organizationModule.GetAllUserAsync());
+            return Ok(await _organizationModule.GetAllOrganizationDetailAsync());
         }
 
         /**
-       * @api {get} /api/organizationModule /:id get one particuler organization information
+       * @api {get} /api/OrganizatioRegistrationController /:id get one particuler organization information
        * @apiName GetorganizationByIDAsync
        * @apiGroup OrganizationModelRagistration
        *    
-       * @apiParam {Number}  Id of the User.
+       * @apiParam {Number}  Id of the organization.
        */
-        [HttpGet("getuserbyId/{Id}")]
+        [HttpGet("organizationbyId/{Id}")]
         public async Task<IActionResult> GetorganizationByIDAsync([FromRoute] int Id)
         {
-            return Ok(await _organizationModule.GetUserByIdAsync(Id));
+            return Ok(await _organizationModule.GetOrganizationDetailByIdAsync (Id));
         }
 
         /**
@@ -65,7 +65,7 @@ namespace PromactManagement.Web.Controllers
         *  }
         * @apiError return StatusCode.
         */
-        [HttpPost("organization")]
+        [HttpPost("createorganization")]
         public async Task<IActionResult> AddOrganizationAsync([FromForm] OrganizationModelDto organization)
         {
            
@@ -79,25 +79,22 @@ namespace PromactManagement.Web.Controllers
         }
 
         /**
-      * @api {put} /organization/ Modify Organization information
+      * @api {put} /OrganizatioRegistrationController/ Modify Organization information
       * @apiName UpdateOrganizationAsync
       * @apiGroup OrganizationModelRagistration
       *
-      * @apiParam {Number} organizationId               organization unique ID.
-      * @apiParam {String} organizationName             organizationName of the organization.
-      * @apiParam {String} OrganizationOwnerEmailId     EMailId of the organization.
-      * @apiParam {bool}   OrganizationStatus           Status of the organization.
-      *       *
+      * @apiParam :{object[]} 
+      * 
       * @apiError return BadRequest.
       */
-        [HttpPut("userupdate")]
-        public async Task<ActionResult> UpdateOrganizationAsync([FromForm] OrganizationModelDto user)
+        [HttpPut("updateorganization")]
+        public async Task<ActionResult> UpdateOrganizationAsync([FromForm] OrganizationModelDto organizationDetail)
         {
-            if (user.OrganizationId != user.OrganizationId)
+            if (organizationDetail.OrganizationId != organizationDetail.OrganizationId)
             {
                 return BadRequest();
             }
-            await _organizationModule.UpdateUserAsync(user);
+            await _organizationModule.UpdateOrganizationDetailAsync(organizationDetail);
             return Ok("Update Successfully");
         }
         #endregion

@@ -22,11 +22,11 @@ namespace PromactManagement.DomainModel.Models.OrganizationModuleRagistration
         public string OrganizationOwnerEmailId { get; set; }
 
         [Required]
-        public string PartnerLevel { get; set; }
+        public PartnerLevelType PartnerLevel { get; set; }
 
         public int ActiveCompany { get; set; }
         public bool OrganizationStatus { get; set; }
-        public string OrganizationType { get; set; }
+        public OrganizationType OrganizationType { get; set; }
 
         [RegularExpression(@"^\([0-9]{4})$", ErrorMessage = "please enter in year formate")]
         public int Partnersince { get; set; }

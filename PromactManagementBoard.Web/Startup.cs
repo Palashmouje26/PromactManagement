@@ -1,24 +1,19 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PromactManagement.DomainModel.ApplicationClass.Mapper;
 using PromactManagement.DomainModel.DbContexts;
-using PromactManagement.Repository.CompanyModuleRagistration;
+using PromactManagement.Repository.CompanyRagistration;
+using PromactManagement.Repository.CompanyRegistration;
 using PromactManagement.Repository.Data;
 using PromactManagement.Repository.OrganizationModuleRagistration;
+using PromactManagement.Repository.OrganizationRegistration;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PromactManagementBoard.Web
 {
@@ -36,8 +31,8 @@ namespace PromactManagementBoard.Web
         {
             services.AddControllers();
             services.AddScoped<IDataRepository, DataRepository>();
-            services.AddScoped<IOrganizationModuleRagistration, OrganizationModuleRagistration>();
-            services.AddScoped<ICompanyModuleRagistration ,CompanyModuleRagistration>();
+            services.AddScoped<IOrganizationRegistration, OrganizationRegistration>();
+            services.AddScoped<ICompanyRegistration, CompanyRegistration>();
             services.AddDbContext<OrganizationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddSwaggerGen(options =>
             {
