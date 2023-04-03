@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace PromactManagement.DomainModel.Models.OrganizationListDto
+namespace PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationListDTO
 {
     public class OrganizationListDto
     {
@@ -30,7 +30,7 @@ namespace PromactManagement.DomainModel.Models.OrganizationListDto
 
 
         [RegularExpression(@"^\([0-9]{4})$", ErrorMessage = "please enter in year format")]
-        public int PartnerSince{ get; set; }
+        public int PartnerSince { get; set; }
 
 
         public bool UseOverrides { get; set; }

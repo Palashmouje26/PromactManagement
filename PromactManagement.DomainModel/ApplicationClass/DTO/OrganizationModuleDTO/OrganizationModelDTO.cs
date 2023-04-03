@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PromactManagement.DomainModel.Models.OrganizationModuleDetail
+namespace PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleDTO
 {
     public class OrganizationModelDto
     {
@@ -22,18 +22,18 @@ namespace PromactManagement.DomainModel.Models.OrganizationModuleDetail
         [Required]
         public PartnerLevelType PartnerLevel { get; set; }
 
-        
+
         public bool OrganizationStatus { get; set; }
         public OrganizationType OrganizationType { get; set; }
 
 
         [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "please enter in year formate")]
-        public int Partnersince { get; set; }
+        public int PartnerSince { get; set; }
 
 
         public bool UseOverrides { get; set; }
 
-      
+
         public string AUAOverride { get; set; }
         public string VCOverride { get; set; }
         public string CostsLastQuarter { get; set; }

@@ -1,5 +1,5 @@
-﻿using PromactManagement.DomainModel.Models.OrganizationListDto;
-using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
+﻿using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationListDTO;
+using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleDTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -37,9 +37,9 @@ namespace PromactManagement.Repository.OrganizationModuleRegistration
         /// <summary>
         /// Updating the organization status.
         /// </summary>
-        /// <param name="Id">Id Is used for selected company detail to update.</param>
-        /// <param name="Status">Status is used for change company status</param>
-        /// <returns>Organization status updat.</returns>
+        /// <param name="Id">Id Is used for selected organization detail to update.</param>
+        /// <param name="Status">Status is used for change organization status</param>
+        /// <returns>Organization status update.</returns>
         Task<OrganizationModelDto> UpdateOrganizationStatusAsync(int Id, bool Status);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
+using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleDTO;
 using PromactManagement.Repository.CompanyRegistration;
 using PromactManagement.Repository.OrganizationModuleRegistration;
 using System.Threading.Tasks;
@@ -26,9 +26,9 @@ namespace PromactManagement.Web.Controllers
 
         #region public Methods
         /**
-       * @api {get} /api/OrganizatioRegistrationController /:get all organization information
-       * @apiName GetOrganizationAsync
-       * @apiGroup OrganizationModelRagistration
+       * @api {get} /api/OrganizatioRegistrationController /:get all organization information.
+       * @apiName GetOrganizationAsync.
+       * @apiGroup OrganizationModelRagistration.
        * 
        * @apiSuccess : List Of registerd organization details.
        * 
@@ -42,9 +42,9 @@ namespace PromactManagement.Web.Controllers
         }
 
         /**
-       * @api {get} /api/OrganizatioRegistrationController /:id get one particuler organization information
-       * @apiName GetorganizationByIDAsync
-       * @apiGroup OrganizationModelRagistration
+       * @api {get} /api/OrganizatioRegistrationController /:Id get one particuler organization information.
+       * @apiName GetorganizationByIDAsync.
+       * @apiGroup OrganizationModelRagistration.
        *    
        * @apiParam {Number}  Id of the organization.
        */
@@ -81,9 +81,9 @@ namespace PromactManagement.Web.Controllers
         }
 
         /**
-      * @api {put} /OrganizatioRegistrationController/ Modify Organization information
-      * @apiName UpdateOrganizationAsync
-      * @apiGroup OrganizationModelRagistration
+      * @api {put} /OrganizatioRegistrationController/ Modify Organization information.
+      * @apiName UpdateOrganizationAsync.
+      * @apiGroup OrganizationModelRagistration.
       *
       * @apiParam :{object[]} 
       * 
@@ -100,9 +100,9 @@ namespace PromactManagement.Web.Controllers
             return Ok("Update Successfully");
         }
         /**
-        * @api {put} /OrganizatioRegistrationController/ Modify Organization status
-        * @apiName UpdateOrganizationStatusAsync
-        * @apiGroup OrganizationModelRagistration
+        * @api {put} /OrganizatioRegistrationController/ Modify Organization status.
+        * @apiName UpdateOrganizationStatusAsync.
+        * @apiGroup OrganizationModelRagistration.
         *
         * @apiParam :{object[]} 
         * 

@@ -1,9 +1,9 @@
 ﻿using PromactManagement.DomainModel.Enum;
 using System;
 
-namespace PromactManagement.DomainModel.Models.CompanyRegistrationDTO
+namespace PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO
 {
-    public  class CompanyModelDTO
+    public class CompanyModelDTO
     {
 
         public int ComapnyId { get; set; }

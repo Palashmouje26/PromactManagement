@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PromactManagement.DomainModel.Models.CompanyRegistration;
-using PromactManagement.DomainModel.Models.CompanyRegistrationDTO;
 using PromactManagement.Repository.Data;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO;
 
 namespace PromactManagement.Repository.CompanyRegistration
 {
@@ -31,7 +31,7 @@ namespace PromactManagement.Repository.CompanyRegistration
 
         #region Public Methods
         /// <summary>
-        /// Add company details.
+        /// Add company details,Company  belong to only one organization.
         /// </summary>
         /// <param name="company">Company registration.</param>
         /// <returns> return object</returns>
@@ -40,7 +40,7 @@ namespace PromactManagement.Repository.CompanyRegistration
             var response = await _dataRepository.Where<CompanyModelRegistration>(x => x.CompanyName == company.CompanyName).AsNoTracking().ToListAsync();
             foreach (var i in response)
             {
-                bool areEqual = string.Equals(i.CompanyName, company.CompanyName, System.StringComparison.OrdinalIgnoreCase);
+                bool areEqual = string.Equals(i.CompanyName, company.CompanyName, System.StringComparison.OrdinalIgnoreCase); //checking company name Upper or lower case.
                 if (areEqual)
                 {
                     throw new Exception("User already exists");
@@ -63,7 +63,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         }
 
         /// <summary>
-        /// This Method is used for showing list of comoany  details.
+        /// This Method is used for showing list of company  details.
         /// </summary>
         /// <param name="Id">Id is used for particuller company detail find.</param>
         /// <returns>Show partucular company regiterd  with details.</returns>
@@ -78,7 +78,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         /// <summary>
         /// Updating all company details .
         /// </summary>
-        /// <param name="companyDetail">Organization detail to update.</param>
+        /// <param name="companyDetail">Company detail to update.</param>
         /// <returns>Updated company detail.</returns>
         public async Task<CompanyModelDTO> UpdateCompanyDetailAsync(CompanyModelDTO companyDetail)
         {
@@ -111,7 +111,6 @@ namespace PromactManagement.Repository.CompanyRegistration
                 }
                 await _dataRepository.UpdateAsync(companyList);
             }
-
         }
         #endregion
     }

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using PromactManagement.DomainModel.Models.CompanyRegistration;
-using PromactManagement.DomainModel.Models.OrganizationListDto;
-using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
 using PromactManagement.DomainModel.Models.OrganizationModuleRegistration;
-using PromactManagement.DomainModel.Models.CompanyRegistrationDTO;
+using PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO;
+using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationListDTO;
+using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleDTO;
 
 namespace PromactManagement.DomainModel.ApplicationClass.Mapper
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PromactManagement.DomainModel.Models.CompanyRegistrationDTO;
+using PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO;
 using PromactManagement.Repository.CompanyRegistration;
 using System.Threading.Tasks;
 
@@ -87,7 +87,6 @@ namespace PromactManagement.Web.Controllers
         * 
         * @apiError return BadRequest.
         */
-
         [HttpPut("updatecompany")]
         public async Task<ActionResult> UpdateCompanyAsync([FromBody] CompanyModelDTO companyDetail)
         {

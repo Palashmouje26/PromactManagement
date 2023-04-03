@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationListDTO;
+using PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleDTO;
 using PromactManagement.DomainModel.Enum;
 using PromactManagement.DomainModel.Models.CompanyRegistration;
-using PromactManagement.DomainModel.Models.OrganizationListDto;
-using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
 using PromactManagement.DomainModel.Models.OrganizationModuleRegistration;
 using PromactManagement.Repository.CompanyRegistration;
 using PromactManagement.Repository.Data;
@@ -43,7 +43,7 @@ namespace PromactManagement.Repository.OrganizationRegistration
             newOrganization.OrganizationId = 0;
             if (organization.OrganizationType == OrganizationType.Partner)
             {
-                newOrganization.PartnerSince = organization.Partnersince;
+                newOrganization.PartnerSince = organization.PartnerSince;
             }
             else
             {
@@ -84,7 +84,7 @@ namespace PromactManagement.Repository.OrganizationRegistration
         {
             var organizationDetail = await _dataRepository.FirstAsync<OrganizationModel>(a => a.OrganizationId == Id);
             var data = _mapper.Map<OrganizationListDto>(organizationDetail);
-            var totalActiveCompany = await _dataRepository.CountAsync<OrganizationModel>(x => x.OrganizationId == Id && x.ActiveCompany == 0);
+            var totalActiveCompany = await _dataRepository.CountAsync<OrganizationModel>(x => x.OrganizationId == Id && x.ActiveCompany == 0);//count of active comapany show.
             data.ActiveCompany = totalActiveCompany;
             return data;
         }
@@ -99,8 +99,8 @@ namespace PromactManagement.Repository.OrganizationRegistration
         {
             var organizationData = await _dataRepository.FirstAsync<OrganizationModel>(a => a.OrganizationId == organizationDetail.OrganizationId);
 
-            var res = _mapper.Map<OrganizationModelDto, OrganizationModel>(organizationDetail, organizationData);
-            await _dataRepository.UpdateAsync(res);
+            var response = _mapper.Map<OrganizationModelDto, OrganizationModel>(organizationDetail, organizationData);
+            await _dataRepository.UpdateAsync(response);
             return _mapper.Map<OrganizationModelDto>(organizationData);
         }
 
@@ -122,7 +122,7 @@ namespace PromactManagement.Repository.OrganizationRegistration
                 foreach (var company in companyList) 
                 {
                     company.CompanyStatus = Status;
-                    await _dataRepository.UpdateAsync(company);
+                    await _dataRepository.UpdateAsync(company); // Here organization status changes then company staus also changes. 
                 }
             }
             return _mapper.Map<OrganizationModelDto>(organizationData);
