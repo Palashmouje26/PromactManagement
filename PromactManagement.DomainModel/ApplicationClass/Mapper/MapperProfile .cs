@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using PromactManagement.DomainModel.Models.CompanyModuleRagistration;
-using PromactManagement.DomainModel.Models.CompanyRagistrationDto;
+using PromactManagement.DomainModel.Models.CompanyRegistration;
 using PromactManagement.DomainModel.Models.OrganizationListDto;
 using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
-using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PromactManagement.DomainModel.Models.OrganizationModuleRegistration;
+using PromactManagement.DomainModel.Models.CompanyRegistrationDTO;
 
 namespace PromactManagement.DomainModel.ApplicationClass.Mapper
 {
@@ -18,8 +15,8 @@ namespace PromactManagement.DomainModel.ApplicationClass.Mapper
             CreateMap<OrganizationModel, OrganizationModelDto>().ReverseMap();
             CreateMap<OrganizationListDto, OrganizationModel>().ReverseMap();
             CreateMap<OrganizationModel, OrganizationListDto>().ReverseMap();
-            CreateMap<CompanyModelDto, CompanyModelRegistration>().ReverseMap();
-            CreateMap<CompanyModelRegistration, CompanyModelDto>().ReverseMap();
+            CreateMap<CompanyModelDTO, CompanyModelRegistration>().ReverseMap();
+            CreateMap<CompanyModelRegistration, CompanyModelDTO>().ReverseMap();
         }
     }
 }

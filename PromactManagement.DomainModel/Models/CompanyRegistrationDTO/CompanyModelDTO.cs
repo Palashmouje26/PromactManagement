@@ -1,13 +1,9 @@
 ﻿using PromactManagement.DomainModel.Enum;
-using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace PromactManagement.DomainModel.Models.CompanyRagistrationDto
+namespace PromactManagement.DomainModel.Models.CompanyRegistrationDTO
 {
-    public  class CompanyModelDto
+    public  class CompanyModelDTO
     {
 
         public int ComapnyId { get; set; }

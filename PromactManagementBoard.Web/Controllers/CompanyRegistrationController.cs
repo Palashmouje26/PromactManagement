@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PromactManagement.DomainModel.Models.CompanyRagistrationDto;
-using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
-using PromactManagement.Repository.CompanyRagistration;
+using PromactManagement.DomainModel.Models.CompanyRegistrationDTO;
+using PromactManagement.Repository.CompanyRegistration;
 using System.Threading.Tasks;
 
 namespace PromactManagement.Web.Controllers
@@ -13,13 +12,13 @@ namespace PromactManagement.Web.Controllers
     {
         #region private Member
         
-        private readonly ICompanyRegistration _companyRagistration;
+        private readonly ICompanyRegistration _companyRegistration;
         #endregion
 
         #region Constructor
-        public CompanyRegistrationController(ICompanyRegistration companyModuleRagistration)
+        public CompanyRegistrationController(ICompanyRegistration companyModuleRegistration)
         {
-            _companyRagistration = companyModuleRagistration;
+            _companyRegistration = companyModuleRegistration;
         }
         #endregion
 
@@ -38,7 +37,7 @@ namespace PromactManagement.Web.Controllers
         [HttpGet("company")]
         public async Task<IActionResult> GetCompanyDetailAsync()
         {
-            return Ok(await _companyRagistration.GetAllCompanyDetailAsync());
+            return Ok(await _companyRegistration.GetAllCompanyDetailAsync());
         }
 
         /**
@@ -51,7 +50,7 @@ namespace PromactManagement.Web.Controllers
         [HttpGet("comanybyId/{Id}")]
         public async Task<IActionResult> GetComanyByIDAsync([FromRoute] int Id)
         {
-            return Ok(await _companyRagistration.GetCompanyDetailByIdAsync(Id));
+            return Ok(await _companyRegistration.GetCompanyDetailByIdAsync(Id));
         }
 
         /**
@@ -68,10 +67,10 @@ namespace PromactManagement.Web.Controllers
         * @apiError return StatusCode.
         */
         [HttpPost("company")]
-        public async Task<IActionResult> AddCompanyDetailAsync([FromBody] CompanyModelDto company)
+        public async Task<IActionResult> AddCompanyDetailAsync([FromBody] CompanyModelDTO company)
         {
 
-            var result = await _companyRagistration.CreateRagistrationAsync(company);
+            var result = await _companyRegistration.CreateCompanyAsync(company);
 
             if (result.ComapnyId == 0)
             {
@@ -90,13 +89,13 @@ namespace PromactManagement.Web.Controllers
         */
 
         [HttpPut("updatecompany")]
-        public async Task<ActionResult> UpdateCompanyAsync([FromBody] CompanyModelDto companyDetail)
+        public async Task<ActionResult> UpdateCompanyAsync([FromBody] CompanyModelDTO companyDetail)
         {
             if (companyDetail.ComapnyId != companyDetail.ComapnyId)
             {
                 return BadRequest();
             }
-            await _companyRagistration.UpdateCompanyDetailAsync(companyDetail);
+            await _companyRegistration.UpdateCompanyDetailAsync(companyDetail);
             return Ok("Update Successfully");
         }
 

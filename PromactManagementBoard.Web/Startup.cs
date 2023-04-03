@@ -8,10 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PromactManagement.DomainModel.ApplicationClass.Mapper;
 using PromactManagement.DomainModel.DbContexts;
-using PromactManagement.Repository.CompanyRagistration;
 using PromactManagement.Repository.CompanyRegistration;
 using PromactManagement.Repository.Data;
-using PromactManagement.Repository.OrganizationModuleRagistration;
+using PromactManagement.Repository.OrganizationModuleRegistration;
 using PromactManagement.Repository.OrganizationRegistration;
 using Swashbuckle.AspNetCore.SwaggerUI;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PromactManagement.DomainModel.Models.CompanyModuleRagistration;
-using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
+using PromactManagement.DomainModel.Models.CompanyRegistration;
+using PromactManagement.DomainModel.Models.OrganizationModuleRegistration;
 
 namespace PromactManagement.DomainModel.DbContexts
 {

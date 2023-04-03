@@ -1,12 +1,8 @@
-﻿using PromactManagement.DomainModel.Models.CompanyRagistrationDto;
-using PromactManagement.DomainModel.Models.OrganizationListDto;
-using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
-using System;
+﻿using PromactManagement.DomainModel.Models.CompanyRegistrationDTO;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PromactManagement.Repository.CompanyRagistration
+namespace PromactManagement.Repository.CompanyRegistration
 {
     public interface ICompanyRegistration
     {
@@ -15,23 +11,25 @@ namespace PromactManagement.Repository.CompanyRagistration
         /// </summary>
         /// <param name="company"> Add New Company or registration in Database.</param>
         /// <returns> return object</returns>
-        Task<CompanyModelDto> CreateRagistrationAsync(CompanyModelDto company);
+        Task<CompanyModelDTO> CreateCompanyAsync(CompanyModelDTO company);
         /// <summary>
         /// Fetch the All Comapny  details.
         /// </summary>
         /// <returns> Fetch the details from the datebase and show in List</returns>
-        Task<List<CompanyModelDto>> GetAllCompanyDetailAsync();
+        Task<List<CompanyModelDTO>> GetAllCompanyDetailAsync();
         /// <summary>
         ///  Updating the comapny details.
         /// </summary>
         /// <param name="companyDetail">Company detail to update.</param>
         /// <returns> Updated comapny detail.</returns>
-        Task<CompanyModelDto> UpdateCompanyDetailAsync(CompanyModelDto companyDetail);
+        Task<CompanyModelDTO> UpdateCompanyDetailAsync(CompanyModelDTO companyDetail);
         /// <summary>
         /// Fetch the comany details with  Id.
         /// </summary>
         /// <param name="Id">Get particlar comapny deatails by Id</param>
         /// <returns>List the details from the database</returns>
-        Task<CompanyModelDto> GetCompanyDetailByIdAsync(int Id);
+        Task<CompanyModelDTO> GetCompanyDetailByIdAsync(int Id);
+        Task UpdateCompanyStatusByIdAsync(int Id, bool Status);
+
     }
 }

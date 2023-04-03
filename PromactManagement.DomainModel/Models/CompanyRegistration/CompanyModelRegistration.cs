@@ -1,9 +1,9 @@
-﻿using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
+﻿using PromactManagement.DomainModel.Models.OrganizationModuleRegistration;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PromactManagement.DomainModel.Models.CompanyModuleRagistration
+namespace PromactManagement.DomainModel.Models.CompanyRegistration
 {
     public class CompanyModelRegistration
     {
@@ -23,8 +23,12 @@ namespace PromactManagement.DomainModel.Models.CompanyModuleRagistration
         public DateTime CompanyCreateDate { get; set; }
 
         public string Notes { get; set; }
+
+
+        [RegularExpression(@"\b[A-Za-z0-9._%-]+@(live\.wcs\.ac\.uk)\b")]
         public string website { get; set; }
 
+        [RegularExpression(@"^(www.|[a-zA-Z].)[a-zA-Z0-9\-\.]+\.(com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk)(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$")]
         public string URLLinke { get; set; }
 
 

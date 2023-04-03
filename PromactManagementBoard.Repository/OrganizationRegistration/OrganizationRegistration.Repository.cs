@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PromactManagement.DomainModel.Enum;
+using PromactManagement.DomainModel.Models.CompanyRegistration;
 using PromactManagement.DomainModel.Models.OrganizationListDto;
 using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
-using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
+using PromactManagement.DomainModel.Models.OrganizationModuleRegistration;
+using PromactManagement.Repository.CompanyRegistration;
 using PromactManagement.Repository.Data;
-using PromactManagement.Repository.OrganizationModuleRagistration;
-using System;
+using PromactManagement.Repository.OrganizationModuleRegistration;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PromactManagement.Repository.OrganizationRegistration
@@ -16,15 +16,17 @@ namespace PromactManagement.Repository.OrganizationRegistration
     public class OrganizationRegistration : IOrganizationRegistration
     {
         #region PrivetMember
+        private readonly ICompanyRegistration _companyRegistration;
         private readonly IDataRepository _dataRepository;
         private readonly IMapper _mapper;
         #endregion
 
         #region Constructor
-        public OrganizationRegistration(IDataRepository dataRepository, IMapper mapper)
+        public OrganizationRegistration(IDataRepository dataRepository, IMapper mapper, ICompanyRegistration companyRegistration)
         {
             _dataRepository = dataRepository;
             _mapper = mapper;
+            _companyRegistration = companyRegistration;
         }
         #endregion
 
@@ -35,17 +37,17 @@ namespace PromactManagement.Repository.OrganizationRegistration
         /// </summary>
         /// <param name="organization"> organization registertion.</param>
         /// <returns> return object</returns>
-        public async Task<OrganizationModelDto> CreateRagistrationAsync(OrganizationModelDto organization)
+        public async Task<OrganizationModelDto> CreateOrganizationAsync(OrganizationModelDto organization)
         {
             var newOrganization = _mapper.Map<OrganizationModelDto, OrganizationModel>(organization);
-             newOrganization.OrganizationId = 0;
-            if (organization.OrganizationType == OrganizationType.Partner) 
+            newOrganization.OrganizationId = 0;
+            if (organization.OrganizationType == OrganizationType.Partner)
             {
-                newOrganization.Partnersince = organization.Partnersince;
+                newOrganization.PartnerSince = organization.Partnersince;
             }
             else
             {
-                newOrganization.Partnersince= 0;
+                newOrganization.PartnerSince = 0;
             }
             if (organization.UseOverrides)
             {
@@ -58,8 +60,6 @@ namespace PromactManagement.Repository.OrganizationRegistration
                 newOrganization.VCOverride = null;
             }
             newOrganization.CostsLastQuarter = $"{organization.CostsLastQuarter}M";
-            // $"{organization.CostsLastQuarter}M";
-            //$@string.Format("{0:#,0.00}", item.TotalAmount)
             await _dataRepository.AddAsync(newOrganization);
             return _mapper.Map<OrganizationModel, OrganizationModelDto>(newOrganization);
         }
@@ -71,7 +71,6 @@ namespace PromactManagement.Repository.OrganizationRegistration
         public async Task<List<OrganizationListDto>> GetAllOrganizationDetailAsync()
         {
             var organizationDetail = await _dataRepository.Where<OrganizationModel>(x => x.ActiveCompany == 0).AsNoTracking().ToListAsync();
-            OrganizationListDto newOrganization = new OrganizationListDto();
 
             return _mapper.Map<List<OrganizationModel>, List<OrganizationListDto>>(organizationDetail);
         }
@@ -80,45 +79,53 @@ namespace PromactManagement.Repository.OrganizationRegistration
         /// This Method is used for showing List of organization  details.
         /// </summary>
         /// <param name="Id">Id is used for particuller Organization detail find.</param>
-        /// <returns>List of partucular organization regiterd  with details.</returns>
-        public async Task<OrganizationListDto> GetOrganizationDetailByIdAsync (int Id)
+        /// <returns>Showing of partucular organization regiterd  with details.</returns>
+        public async Task<OrganizationListDto> GetOrganizationDetailByIdAsync(int Id)
         {
             var organizationDetail = await _dataRepository.FirstAsync<OrganizationModel>(a => a.OrganizationId == Id);
-
-            OrganizationListDto newOrganization = new OrganizationListDto();
-            newOrganization.OrganizationId = Id;
-            newOrganization.OrganizationName = organizationDetail.OrganizationName;
-            newOrganization.OrganizationOwnerEmailId = organizationDetail.OrganizationOwnerEmailId;
-           // newOrganization.PartnerLevel = organizationDetail.PartnerLevel;
-            newOrganization .ActiveCompany= await _dataRepository.CountAsync<OrganizationModel>(authUser => authUser.OrganizationId == Id && authUser.ActiveCompany==0);
-            newOrganization.OrganizationStatus = organizationDetail.OrganizationStatus;
-            //newOrganization.OrganizationType    = organizationDetail.OrganizationType;
-            newOrganization.Partnersince = organizationDetail.Partnersince;
-            newOrganization.UseOverrides = organizationDetail.UseOverrides;
-            newOrganization.AUAOverride = organizationDetail.AUAOverride;
-            newOrganization.VCOverride = organizationDetail.VCOverride;
-            newOrganization.CostsLastQuarter = organizationDetail.CostsLastQuarter;
-            newOrganization.ActiveSince = organizationDetail.ActiveSince;
-            newOrganization.Notes = organizationDetail.Notes;
-            return _mapper.Map<OrganizationListDto>(newOrganization);
+            var data = _mapper.Map<OrganizationListDto>(organizationDetail);
+            var totalActiveCompany = await _dataRepository.CountAsync<OrganizationModel>(x => x.OrganizationId == Id && x.ActiveCompany == 0);
+            data.ActiveCompany = totalActiveCompany;
+            return data;
         }
-        
+
 
         /// <summary>
-        /// Updating OrganizationName, OrganizationOwnerEmailId, & OrganizationStatus.
+        /// Updating all the organization information.
         /// </summary>
         /// <param name="organizationDetail">Organization detail to update.</param>
         /// <returns>Updated organization detail.</returns>
-        public async Task<OrganizationModelDto> UpdateOrganizationDetailAsync (OrganizationModelDto organizationDetail)
+        public async Task<OrganizationModelDto> UpdateOrganizationDetailAsync(OrganizationModelDto organizationDetail)
         {
             var organizationData = await _dataRepository.FirstAsync<OrganizationModel>(a => a.OrganizationId == organizationDetail.OrganizationId);
 
-            organizationData.OrganizationName = organizationDetail.OrganizationName;
-            organizationData.OrganizationOwnerEmailId = organizationDetail.OrganizationOwnerEmailId;
-            organizationData.OrganizationStatus = organizationDetail.OrganizationStatus;
+            var res = _mapper.Map<OrganizationModelDto, OrganizationModel>(organizationDetail, organizationData);
+            await _dataRepository.UpdateAsync(res);
+            return _mapper.Map<OrganizationModelDto>(organizationData);
+        }
 
-            await _dataRepository.UpdateAsync(organizationData);
-            return _mapper.Map<OrganizationModelDto>(organizationDetail);
+        /// <summary>
+        /// Updating Organization Stauts.
+        /// </summary>
+        /// <param name="Id">Id Is used for selected organization detail to update.</param>
+        /// <param name="Status">Status is used for change organization status.</param>
+        /// <returns>Updating Organization status.</returns>
+        public async Task<OrganizationModelDto> UpdateOrganizationStatusAsync(int Id, bool Status)
+        {
+            var organizationData = await _dataRepository.FirstOrDefaultAsync<OrganizationModel>(a => a.OrganizationId == Id);
+            if (organizationData != null)
+            {
+                organizationData.OrganizationStatus = Status;
+                var companyListData = new List<CompanyModelRegistration>();
+                await _dataRepository.UpdateAsync(organizationData);
+                var companyList = await _dataRepository.Where<CompanyModelRegistration>(a => a.OrganizationId == Id).ToListAsync();
+                foreach (var company in companyList) 
+                {
+                    company.CompanyStatus = Status;
+                    await _dataRepository.UpdateAsync(company);
+                }
+            }
+            return _mapper.Map<OrganizationModelDto>(organizationData);
         }
         #endregion
     }

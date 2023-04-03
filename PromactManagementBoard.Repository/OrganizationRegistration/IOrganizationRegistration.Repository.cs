@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PromactManagement.DomainModel.Models.OrganizationListDto;
+﻿using PromactManagement.DomainModel.Models.OrganizationListDto;
 using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
-using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PromactManagement.Repository.OrganizationModuleRagistration
+namespace PromactManagement.Repository.OrganizationModuleRegistration
 {
     public interface IOrganizationRegistration
     {
@@ -16,7 +12,7 @@ namespace PromactManagement.Repository.OrganizationModuleRagistration
         /// </summary>
         /// <param name="organization">Add New organization or registration in Database</param>
         /// <returns> return object</returns>
-        Task<OrganizationModelDto> CreateRagistrationAsync(OrganizationModelDto organization);
+        Task<OrganizationModelDto> CreateOrganizationAsync(OrganizationModelDto organization);
 
         /// <summary>
         /// Fetch the All Organization details.
@@ -38,5 +34,12 @@ namespace PromactManagement.Repository.OrganizationModuleRagistration
         /// <returns>Updated organization detail.</returns>
         Task<OrganizationModelDto> UpdateOrganizationDetailAsync(OrganizationModelDto organizationDetail);
 
+        /// <summary>
+        /// Updating the organization status.
+        /// </summary>
+        /// <param name="Id">Id Is used for selected company detail to update.</param>
+        /// <param name="Status">Status is used for change company status</param>
+        /// <returns>Organization status updat.</returns>
+        Task<OrganizationModelDto> UpdateOrganizationStatusAsync(int Id, bool Status);
     }
 }

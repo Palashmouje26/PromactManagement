@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PromactManagement.DomainModel.Models.OrganizationModuleRagistration
+namespace PromactManagement.DomainModel.Models.OrganizationModuleRegistration
 {
     public class OrganizationModel 
     {
@@ -29,7 +29,7 @@ namespace PromactManagement.DomainModel.Models.OrganizationModuleRagistration
         public OrganizationType OrganizationType { get; set; }
 
         [RegularExpression(@"^\([0-9]{4})$", ErrorMessage = "please enter in year formate")]
-        public int Partnersince { get; set; }
+        public int PartnerSince{ get; set; }
 
         public bool UseOverrides { get; set; }
         [RegularExpression(@"^\([0-9]{4})$", ErrorMessage = "please enter in year formate")]

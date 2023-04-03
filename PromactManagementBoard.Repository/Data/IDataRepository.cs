@@ -83,6 +83,9 @@ namespace PromactManagement.Repository.Data
         Task UpdateRangeAsync<T>(IEnumerable<T> entities)
             where T : class;
 
+       Task UpdateStatusAsync<T>(List<T> entities) 
+            where T : class;
+
         /// <summary>
         /// Remove entity from the DbSet.
         /// </summary>
@@ -151,12 +154,17 @@ namespace PromactManagement.Repository.Data
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="predicate"></param>
+        /// <typeparam name="T">Model class to create DbSet.</typeparam>
+        /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns></returns>
         Task<T> FindAsync<T>(Expression<Func<T, bool>> predicate)
             where T : class;
-
+        /// <summary>
+        /// Get Count from Dbset.
+        /// </summary>
+        /// <typeparam name="T">Model class to create DbSet.</typeparam>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        /// <returns></returns>
         Task<int> CountAsync<T>(Expression<Func<T, bool>> predicate)
             where T : class;
     }

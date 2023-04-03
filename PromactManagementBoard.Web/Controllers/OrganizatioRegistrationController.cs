@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PromactManagement.DomainModel.Models.OrganizationModuleDetail;
-using PromactManagement.DomainModel.Models.OrganizationModuleRagistration;
-using PromactManagement.Repository.OrganizationModuleRagistration;
+using PromactManagement.Repository.CompanyRegistration;
+using PromactManagement.Repository.OrganizationModuleRegistration;
 using System.Threading.Tasks;
 
 namespace PromactManagement.Web.Controllers
@@ -13,12 +13,14 @@ namespace PromactManagement.Web.Controllers
     {
         #region private Member
         private readonly IOrganizationRegistration _organizationModule;
+        private readonly ICompanyRegistration _companyRegistration;
         #endregion
 
         #region Constructor
-        public OrganizatioRegistrationController(IOrganizationRegistration organizationModule)
+        public OrganizatioRegistrationController(IOrganizationRegistration organizationModule, ICompanyRegistration companyRegistration)
         {
             _organizationModule = organizationModule;
+            _companyRegistration = companyRegistration;
         }
         #endregion
 
@@ -69,7 +71,7 @@ namespace PromactManagement.Web.Controllers
         public async Task<IActionResult> AddOrganizationAsync([FromForm] OrganizationModelDto organization)
         {
            
-            var result = await _organizationModule.CreateRagistrationAsync(organization);
+            var result = await _organizationModule.CreateOrganizationAsync(organization);
 
             if (result.OrganizationId == 0)
             {
@@ -96,6 +98,22 @@ namespace PromactManagement.Web.Controllers
             }
             await _organizationModule.UpdateOrganizationDetailAsync(organizationDetail);
             return Ok("Update Successfully");
+        }
+        /**
+        * @api {put} /OrganizatioRegistrationController/ Modify Organization status
+        * @apiName UpdateOrganizationStatusAsync
+        * @apiGroup OrganizationModelRagistration
+        *
+        * @apiParam :{object[]} 
+        * 
+        */
+        [HttpPut("updateorganizationstatus")]
+        public async Task<ActionResult> UpdateOrganizationStatusAsync(int Id, bool Status)
+        {
+          
+            await _organizationModule.UpdateOrganizationStatusAsync(Id, Status);
+           
+            return Ok("Status Update Successfully");
         }
         #endregion
     }

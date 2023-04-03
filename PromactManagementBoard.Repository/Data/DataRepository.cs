@@ -131,6 +131,12 @@ namespace PromactManagement.Repository.Data
             throw new NotImplementedException();
         }
 
+        public async Task UpdateStatusAsync<T>(List<T> entities) where T : class
+        {
+             _organizationDbContext.Update(entities);
+            await _organizationDbContext.SaveChangesAsync();
+        }
+
         public IQueryable<T> Where<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             var dbSet = CreateDbSetAsync<T>();
