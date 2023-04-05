@@ -14,7 +14,7 @@ using PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO;
 
 namespace PromactManagement.Repository.CompanyRegistration
 {
-    public class CompanyRegistration : ICompanyRegistration
+    public class CompanyRegistrationRepository : ICompanyRegistrationRepository
     {
         #region PrivetMember
         private readonly IDataRepository _dataRepository;
@@ -22,7 +22,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         #endregion
 
         #region Constructor
-        public CompanyRegistration(IDataRepository dataRepository, IMapper mapper)
+        public CompanyRegistrationRepository(IDataRepository dataRepository, IMapper mapper)
         {
             _dataRepository = dataRepository;
             _mapper = mapper;

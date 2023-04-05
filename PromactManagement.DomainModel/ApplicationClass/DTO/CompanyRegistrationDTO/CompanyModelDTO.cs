@@ -12,7 +12,7 @@ namespace PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistration
 
         public int OrganizationId { get; set; }
 
-        public PartnerLevelType PartnerLevel { get; set; }
+        public string PartnerLevel { get; set; }
         public bool CompanyStatus { get; set; }
 
         public DateTime CompanyCreateDate { get; set; }

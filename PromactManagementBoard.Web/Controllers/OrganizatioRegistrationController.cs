@@ -13,14 +13,14 @@ namespace PromactManagement.Web.Controllers
     {
         #region private Member
         private readonly IOrganizationRegistration _organizationModule;
-        private readonly ICompanyRegistration _companyRegistration;
+    
         #endregion
 
         #region Constructor
-        public OrganizatioRegistrationController(IOrganizationRegistration organizationModule, ICompanyRegistration companyRegistration)
+        public OrganizatioRegistrationController(IOrganizationRegistration organizationModule)
         {
             _organizationModule = organizationModule;
-            _companyRegistration = companyRegistration;
+            
         }
         #endregion
 
@@ -49,7 +49,7 @@ namespace PromactManagement.Web.Controllers
        * @apiParam {Number}  Id of the organization.
        */
         [HttpGet("organizationbyId/{Id}")]
-        public async Task<IActionResult> GetorganizationByIDAsync([FromRoute] int Id)
+        public async Task<IActionResult> GetOrganizationByIDAsync([FromRoute] int Id)
         {
             return Ok(await _organizationModule.GetOrganizationDetailByIdAsync (Id));
         }

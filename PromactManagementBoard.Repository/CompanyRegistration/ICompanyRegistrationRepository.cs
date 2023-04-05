@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PromactManagement.Repository.CompanyRegistration
 {
-    public interface ICompanyRegistration
+    public interface ICompanyRegistrationRepository
     {
         /// <summary>
         /// Add New company Details.

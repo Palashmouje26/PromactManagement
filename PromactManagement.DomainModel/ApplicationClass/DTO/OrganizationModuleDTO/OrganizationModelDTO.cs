@@ -20,11 +20,11 @@ namespace PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleD
         public string OrganizationOwnerEmailId { get; set; }
 
         [Required]
-        public PartnerLevelType PartnerLevel { get; set; }
+        public string PartnerLevel { get; set; }
 
 
         public bool OrganizationStatus { get; set; }
-        public OrganizationType OrganizationType { get; set; }
+        public string OrganizationType { get; set; }
 
 
         [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "please enter in year formate")]

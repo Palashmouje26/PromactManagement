@@ -12,11 +12,11 @@ namespace PromactManagement.Web.Controllers
     {
         #region private Member
         
-        private readonly ICompanyRegistration _companyRegistration;
+        private readonly ICompanyRegistrationRepository _companyRegistration;
         #endregion
 
         #region Constructor
-        public CompanyRegistrationController(ICompanyRegistration companyModuleRegistration)
+        public CompanyRegistrationController(ICompanyRegistrationRepository companyModuleRegistration)
         {
             _companyRegistration = companyModuleRegistration;
         }

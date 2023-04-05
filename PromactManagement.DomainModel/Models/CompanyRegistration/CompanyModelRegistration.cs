@@ -31,9 +31,6 @@ namespace PromactManagement.DomainModel.Models.CompanyRegistration
         [RegularExpression(@"^(www.|[a-zA-Z].)[a-zA-Z0-9\-\.]+\.(com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk)(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$")]
         public string URLLinke { get; set; }
 
-
-
-
     }
 }
 

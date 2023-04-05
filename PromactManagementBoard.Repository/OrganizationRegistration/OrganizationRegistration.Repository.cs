@@ -16,13 +16,13 @@ namespace PromactManagement.Repository.OrganizationRegistration
     public class OrganizationRegistration : IOrganizationRegistration
     {
         #region PrivetMember
-        private readonly ICompanyRegistration _companyRegistration;
+        private readonly ICompanyRegistrationRepository _companyRegistration;
         private readonly IDataRepository _dataRepository;
         private readonly IMapper _mapper;
         #endregion
 
         #region Constructor
-        public OrganizationRegistration(IDataRepository dataRepository, IMapper mapper, ICompanyRegistration companyRegistration)
+        public OrganizationRegistration(IDataRepository dataRepository, IMapper mapper, ICompanyRegistrationRepository companyRegistration)
         {
             _dataRepository = dataRepository;
             _mapper = mapper;
@@ -41,7 +41,7 @@ namespace PromactManagement.Repository.OrganizationRegistration
         {
             var newOrganization = _mapper.Map<OrganizationModelDto, OrganizationModel>(organization);
             newOrganization.OrganizationId = 0;
-            if (organization.OrganizationType == OrganizationType.Partner)
+            if (organization.OrganizationType == "Partner")
             {
                 newOrganization.PartnerSince = organization.PartnerSince;
             }
@@ -83,10 +83,10 @@ namespace PromactManagement.Repository.OrganizationRegistration
         public async Task<OrganizationListDto> GetOrganizationDetailByIdAsync(int Id)
         {
             var organizationDetail = await _dataRepository.FirstAsync<OrganizationModel>(a => a.OrganizationId == Id);
-            var data = _mapper.Map<OrganizationListDto>(organizationDetail);
+            var response = _mapper.Map<OrganizationListDto>(organizationDetail);
             var totalActiveCompany = await _dataRepository.CountAsync<OrganizationModel>(x => x.OrganizationId == Id && x.ActiveCompany == 0);//count of active comapany show.
-            data.ActiveCompany = totalActiveCompany;
-            return data;
+            response.ActiveCompany = totalActiveCompany;
+            return response;
         }
 
 
