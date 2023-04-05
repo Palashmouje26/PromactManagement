@@ -46,6 +46,8 @@ namespace PromactManagement.Web.Controllers
         * @apiGroup CompanyModelRegistration
         *    
         * @apiParam {Number}  Id of the company.
+        * 
+        *  @apiSuccess : Showing particuler Of registerd company details.
         */
         [HttpGet("comanybyId/{Id}")]
         public async Task<IActionResult> GetComanyByIDAsync([FromRoute] int Id)
