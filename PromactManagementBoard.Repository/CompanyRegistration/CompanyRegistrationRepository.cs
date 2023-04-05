@@ -3,13 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using PromactManagement.DomainModel.Models.CompanyRegistration;
 using PromactManagement.Repository.Data;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using PromactManagement.Repository.OrganizationModuleRegistration;
-using Microsoft.AspNetCore.Http;
 using System;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO;
 
 namespace PromactManagement.Repository.CompanyRegistration

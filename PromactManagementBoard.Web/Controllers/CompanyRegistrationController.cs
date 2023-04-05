@@ -68,7 +68,7 @@ namespace PromactManagement.Web.Controllers
         *  }
         * @apiError return StatusCode.
         */
-        [HttpPost("company")]
+        [HttpPost("companycreate")]
         public async Task<IActionResult> AddCompanyDetailAsync([FromBody] CompanyModelDTO company)
         {
 
