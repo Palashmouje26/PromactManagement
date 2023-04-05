@@ -42,7 +42,7 @@ namespace PromactManagement.Repository.CompanyRegistration
                 }
             }
             var companyData = _mapper.Map<CompanyModelDTO, CompanyModelRegistration>(company);
-            companyData.ComapnyId = 0;
+            companyData.CompanyId = 0;
             await _dataRepository.AddAsync(companyData);
             return company;
 
@@ -64,7 +64,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         /// <returns>Show partucular company regiterd  with details.</returns>
         public async Task<CompanyModelDTO> GetCompanyDetailByIdAsync(int Id)
         {
-            var companyDetail = await _dataRepository.FirstAsync<CompanyModelRegistration>(a => a.ComapnyId == Id);
+            var companyDetail = await _dataRepository.FirstAsync<CompanyModelRegistration>(a => a.CompanyId == Id);
 
             return _mapper.Map<CompanyModelDTO>(companyDetail);
         }
@@ -79,7 +79,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         {
             if (companyDetail.ComapnyId == 1)
             {
-                var companyData = await _dataRepository.FirstAsync<CompanyModelRegistration>(a => a.ComapnyId == companyDetail.ComapnyId);
+                var companyData = await _dataRepository.FirstAsync<CompanyModelRegistration>(a => a.CompanyId == companyDetail.ComapnyId);
                 var data = _mapper.Map<CompanyModelDTO, CompanyModelRegistration>(companyDetail, companyData);
                 await _dataRepository.UpdateAsync(data);
                 return _mapper.Map<CompanyModelDTO>(companyDetail);

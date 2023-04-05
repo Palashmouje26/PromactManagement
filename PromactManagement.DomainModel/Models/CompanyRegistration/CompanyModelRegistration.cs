@@ -8,7 +8,7 @@ namespace PromactManagement.DomainModel.Models.CompanyRegistration
     public class CompanyModelRegistration
     {
         [Key]
-        public int ComapnyId { get; set; }
+        public int CompanyId { get; set; }
         public string CompanyName { get; set; }
         public string CompanyOwner { get; set; }
 
