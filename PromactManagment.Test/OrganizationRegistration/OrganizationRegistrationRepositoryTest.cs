@@ -72,7 +72,7 @@ namespace PromactManagment.Test.OrganizationRegistration
         [Fact]
         public async Task CreateOrganizationTest()
         {
-            OrganizationModelDto organizations = new OrganizationModelDto()
+            OrganizationDTO organizations = new OrganizationDTO()
             {
                 OrganizationId = 4,
                 OrganizationName = "Test",
@@ -89,7 +89,7 @@ namespace PromactManagment.Test.OrganizationRegistration
                 Notes = "dsfs"
             };
 
-            _organizationModule.Setup(x => x.CreateOrganizationAsync(It.IsAny<OrganizationModelDto>())).ReturnsAsync(organizations);
+            _organizationModule.Setup(x => x.CreateOrganizationAsync(It.IsAny<OrganizationDTO>())).ReturnsAsync(organizations);
 
             var organizationData = await _organizationController.AddOrganizationAsync(organizations);
            
@@ -104,7 +104,7 @@ namespace PromactManagment.Test.OrganizationRegistration
         [Fact]
         public async Task UpdateOrganizationTest ()
         {
-            OrganizationModelDto organizations = new OrganizationModelDto()
+            OrganizationDTO organizations = new OrganizationDTO()
             {
                 OrganizationId = 3,
                 OrganizationName = "Palash",
@@ -121,7 +121,7 @@ namespace PromactManagment.Test.OrganizationRegistration
                 Notes = "Hello World"
             };
 
-            _organizationModule.Setup(x => x.UpdateOrganizationDetailAsync(It.IsAny<OrganizationModelDto>())).ReturnsAsync(organizations);
+            _organizationModule.Setup(x => x.UpdateOrganizationDetailAsync(It.IsAny<OrganizationDTO>())).ReturnsAsync(organizations);
 
             var organizationData = await _organizationController.UpdateOrganizationAsync(organizations);
 

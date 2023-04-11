@@ -3,7 +3,7 @@ using System;
 
 namespace PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO
 {
-    public class CompanyModelDTO
+    public class CompanyDTO
     {
 
         public int ComapnyId { get; set; }

@@ -9,7 +9,7 @@ using PromactManagement.DomainModel.ApplicationClass.DTO.CompanyRegistrationDTO;
 
 namespace PromactManagement.Repository.CompanyRegistration
 {
-    public class CompanyRegistrationRepository : ICompanyRegistrationRepository
+    public class CompanyRepository : ICompanyRepository
     {
         #region PrivetMember
         private readonly IDataRepository _dataRepository;
@@ -17,7 +17,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         #endregion
 
         #region Constructor
-        public CompanyRegistrationRepository(IDataRepository dataRepository, IMapper mapper)
+        public CompanyRepository(IDataRepository dataRepository, IMapper mapper)
         {
             _dataRepository = dataRepository;
             _mapper = mapper;
@@ -30,7 +30,7 @@ namespace PromactManagement.Repository.CompanyRegistration
         /// </summary>
         /// <param name="company">Company registration.</param>
         /// <returns> return object</returns>
-        public async Task<CompanyModelDTO> CreateCompanyAsync(CompanyModelDTO company)
+        public async Task<CompanyDTO> CreateCompanyAsync(CompanyDTO company)
         {
             var response = await _dataRepository.Where<CompanyModelRegistration>(x => x.CompanyName == company.CompanyName).AsNoTracking().ToListAsync();
             foreach (var i in response)
@@ -41,7 +41,7 @@ namespace PromactManagement.Repository.CompanyRegistration
                     throw new Exception("User already exists");
                 }
             }
-            var companyData = _mapper.Map<CompanyModelDTO, CompanyModelRegistration>(company);
+            var companyData = _mapper.Map<CompanyDTO, CompanyModelRegistration>(company);
             companyData.CompanyId = 0;
             await _dataRepository.AddAsync(companyData);
             return company;
@@ -51,10 +51,10 @@ namespace PromactManagement.Repository.CompanyRegistration
         /// Show all registerd company list.
         /// </summary>
         /// <returns> List all company registerd with details.</returns>
-        public async Task<List<CompanyModelDTO>> GetAllCompanyDetailAsync()
+        public async Task<List<CompanyDTO>> GetAllCompanyDetailAsync()
         {
             var companyDetail = await _dataRepository.Where<CompanyModelRegistration>(x => x.CompanyStatus).AsNoTracking().ToListAsync();
-            return _mapper.Map<List<CompanyModelRegistration>, List<CompanyModelDTO>>(companyDetail);
+            return _mapper.Map<List<CompanyModelRegistration>, List<CompanyDTO>>(companyDetail);
         }
 
         /// <summary>
@@ -62,11 +62,11 @@ namespace PromactManagement.Repository.CompanyRegistration
         /// </summary>
         /// <param name="Id">Id is used for particuller company detail find.</param>
         /// <returns>Show partucular company regiterd  with details.</returns>
-        public async Task<CompanyModelDTO> GetCompanyDetailByIdAsync(int Id)
+        public async Task<CompanyDTO> GetCompanyDetailByIdAsync(int Id)
         {
             var companyDetail = await _dataRepository.FirstAsync<CompanyModelRegistration>(a => a.CompanyId == Id);
 
-            return _mapper.Map<CompanyModelDTO>(companyDetail);
+            return _mapper.Map<CompanyDTO>(companyDetail);
         }
 
 
@@ -75,14 +75,14 @@ namespace PromactManagement.Repository.CompanyRegistration
         /// </summary>
         /// <param name="companyDetail">Company detail to update.</param>
         /// <returns>Updated company detail.</returns>
-        public async Task<CompanyModelDTO> UpdateCompanyDetailAsync(CompanyModelDTO companyDetail)
+        public async Task<CompanyDTO> UpdateCompanyDetailAsync(CompanyDTO companyDetail)
         {
             if (companyDetail.ComapnyId == 1)
             {
                 var companyData = await _dataRepository.FirstAsync<CompanyModelRegistration>(a => a.CompanyId == companyDetail.ComapnyId);
-                var data = _mapper.Map<CompanyModelDTO, CompanyModelRegistration>(companyDetail, companyData);
+                var data = _mapper.Map<CompanyDTO, CompanyModelRegistration>(companyDetail, companyData);
                 await _dataRepository.UpdateAsync(data);
-                return _mapper.Map<CompanyModelDTO>(companyDetail);
+                return _mapper.Map<CompanyDTO>(companyDetail);
             }
             else
             {

@@ -13,27 +13,26 @@ namespace PromactManagement.Web.Controllers
     {
         #region private Member
         private readonly IOrganizationRegistration _organizationModule;
-    
+
         #endregion
 
         #region Constructor
         public OrganizatioRegistrationController(IOrganizationRegistration organizationModule)
         {
             _organizationModule = organizationModule;
-            
+
         }
         #endregion
 
         #region public Methods
         /**
-       * @api {get} /api/OrganizatioRegistrationController /:get all organization information.
+       * @api {get} /api/Organization/:get all organization information.
        * @apiName GetOrganizationAsync.
-       * @apiGroup OrganizationModelRagistration.
+       * @apiGroup Organization.
        * 
        * @apiSuccess : List Of registerd organization details.
        * 
        * @apiSuccessExample Success-Response:{object[]}   
-       * @apiError OrganizationNotFound The information of the User was not found.
        */
         [HttpGet("organization")]
         public async Task<IActionResult> GetOrganizationAsync()
@@ -42,35 +41,27 @@ namespace PromactManagement.Web.Controllers
         }
 
         /**
-       * @api {get} /api/OrganizatioRegistrationController /:Id get one particuler organization information.
+       * @api {get} /api/Organization/:Id get one particuler organization information.
        * @apiName GetorganizationByIDAsync.
-       * @apiGroup OrganizationModelRagistration.
+       * @apiGroup Organization.
        *    
        * @apiParam {Number}  Id of the organization.
        */
         [HttpGet("organizationbyId/{Id}")]
         public async Task<IActionResult> GetOrganizationByIDAsync([FromRoute] int Id)
         {
-            return Ok(await _organizationModule.GetOrganizationDetailByIdAsync (Id));
+            return Ok(await _organizationModule.GetOrganizationDetailByIdAsync(Id));
         }
 
         /**
-        * @api {post} /OrganizationModelRagistration/
-        * @apiBody {String} organizationName           Mandatory Firstname of the user.
-        * @apiBody {String} OrganizationOwnerEmailId   Mandatory  input with small letter"Xyz@xxx.com".
-        * @apiBody {String} OrganizationStatus         Mandatory nested status object.
-        * 
-        * @apiSuccessExample Success-Response:
-        *  { 
-        *      organizationName = "John",
-        *      OrganizationOwnerEmailId =  "Xyz@abc.com"
-        *  }
-        * @apiError return StatusCode.
+        *   @api {post} api/Organization/add organization Method to add organization detail.
+        *   
+        *   @apiBody {object} organization detail.
         */
         [HttpPost("createorganization")]
-        public async Task<IActionResult> AddOrganizationAsync([FromForm] OrganizationModelDto organization)
+        public async Task<IActionResult> AddOrganizationAsync([FromForm] OrganizationDTO organization)
         {
-           
+
             var result = await _organizationModule.CreateOrganizationAsync(organization);
 
             if (result.OrganizationId == 0)
@@ -81,16 +72,16 @@ namespace PromactManagement.Web.Controllers
         }
 
         /**
-      * @api {put} /OrganizatioRegistrationController/ Modify Organization information.
+      * @api {put} /Organization/ Modify Organization information.
       * @apiName UpdateOrganizationAsync.
-      * @apiGroup OrganizationModelRagistration.
+      * @apiGroup Organization.
       *
       * @apiParam :{object[]} 
       * 
       * @apiError return BadRequest.
       */
         [HttpPut("updateorganization")]
-        public async Task<ActionResult> UpdateOrganizationAsync([FromForm] OrganizationModelDto organizationDetail)
+        public async Task<ActionResult> UpdateOrganizationAsync([FromForm] OrganizationDTO organizationDetail)
         {
             if (organizationDetail.OrganizationId != organizationDetail.OrganizationId)
             {
@@ -100,9 +91,9 @@ namespace PromactManagement.Web.Controllers
             return Ok("Update Successfully");
         }
         /**
-        * @api {put} /OrganizatioRegistrationController/ Modify Organization status.
+        * @api {put} /Organization/ Modify Organization status.
         * @apiName UpdateOrganizationStatusAsync.
-        * @apiGroup OrganizationModelRagistration.
+        * @apiGroup Organization.
         *
         * @apiParam :{object[]} 
         * 
@@ -110,9 +101,9 @@ namespace PromactManagement.Web.Controllers
         [HttpPut("updateorganizationstatus")]
         public async Task<ActionResult> UpdateOrganizationStatusAsync(int Id, bool Status)
         {
-          
+
             await _organizationModule.UpdateOrganizationStatusAsync(Id, Status);
-           
+
             return Ok("Status Update Successfully");
         }
         #endregion

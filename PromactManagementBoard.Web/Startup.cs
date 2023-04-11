@@ -31,7 +31,7 @@ namespace PromactManagementBoard.Web
             services.AddControllers();
             services.AddScoped<IDataRepository, DataRepository>();
             services.AddScoped<IOrganizationRegistration, OrganizationRegistration>();
-            services.AddScoped<ICompanyRegistrationRepository, CompanyRegistrationRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddDbContext<OrganizationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddSwaggerGen(options =>
             {
@@ -42,6 +42,7 @@ namespace PromactManagementBoard.Web
                 });
             });
 
+          
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MapperProfile());

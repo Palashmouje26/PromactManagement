@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PromactManagement.DomainModel.ApplicationClass.DTO.OrganizationModuleDTO
 {
-    public class OrganizationModelDto
+    public class OrganizationDTO
     {
         public int OrganizationId { get; set; }
 

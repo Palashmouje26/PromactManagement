@@ -12,11 +12,11 @@ namespace PromactManagement.Web.Controllers
     {
         #region private Member
         
-        private readonly ICompanyRegistrationRepository _companyRegistration;
+        private readonly ICompanyRepository _companyRegistration;
         #endregion
 
         #region Constructor
-        public CompanyRegistrationController(ICompanyRegistrationRepository companyModuleRegistration)
+        public CompanyRegistrationController(ICompanyRepository companyModuleRegistration)
         {
             _companyRegistration = companyModuleRegistration;
         }
@@ -69,7 +69,7 @@ namespace PromactManagement.Web.Controllers
         * @apiError return StatusCode.
         */
         [HttpPost("companycreate")]
-        public async Task<IActionResult> AddCompanyDetailAsync([FromBody] CompanyModelDTO company)
+        public async Task<IActionResult> AddCompanyDetailAsync([FromBody] CompanyDTO company)
         {
 
             var result = await _companyRegistration.CreateCompanyAsync(company);
@@ -90,7 +90,7 @@ namespace PromactManagement.Web.Controllers
         * @apiError return BadRequest.
         */
         [HttpPut("updatecompany")]
-        public async Task<ActionResult> UpdateCompanyAsync([FromBody] CompanyModelDTO companyDetail)
+        public async Task<ActionResult> UpdateCompanyAsync([FromBody] CompanyDTO companyDetail)
         {
             if (companyDetail.ComapnyId != companyDetail.ComapnyId)
             {

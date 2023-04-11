@@ -14,7 +14,7 @@ namespace PromactManagment.Test.CompanyRegistration
     {
         #region Private Variables
         #region Dependencies
-        private readonly Mock<ICompanyRegistrationRepository> _companyRegistration;
+        private readonly Mock<ICompanyRepository> _companyRegistration;
         private readonly CompanyRegistrationController _companyRegistrationController;
         private readonly Mock<IDataRepository> _dataRepository;
         #endregion
@@ -23,7 +23,7 @@ namespace PromactManagment.Test.CompanyRegistration
         #region Constructor
         public CompanyModelRegistrationTest()
         {
-            _companyRegistration = new Mock<ICompanyRegistrationRepository>();
+            _companyRegistration = new Mock<ICompanyRepository>();
             _dataRepository = new Mock<IDataRepository>();
             _companyRegistrationController = new CompanyRegistrationController(_companyRegistration.Object);
         }
@@ -38,12 +38,12 @@ namespace PromactManagment.Test.CompanyRegistration
         public async Task GetAllCompanyDetailTest()
         {
             //Arrange
-            _companyRegistration.Setup(x => x.GetAllCompanyDetailAsync()).ReturnsAsync(new List<CompanyModelDTO>() { new CompanyModelDTO(), new CompanyModelDTO() });
+            _companyRegistration.Setup(x => x.GetAllCompanyDetailAsync()).ReturnsAsync(new List<CompanyDTO>() { new CompanyDTO(), new CompanyDTO() });
             //Art
             var result = await _companyRegistrationController.GetCompanyDetailAsync();
             //Assert
             var viewResult = Assert.IsType<OkObjectResult>(result);
-            var company = Assert.IsType<List<CompanyModelDTO>>(viewResult.Value);
+            var company = Assert.IsType<List<CompanyDTO>>(viewResult.Value);
             Assert.Equal(2, company.Count);
         }
 
@@ -68,7 +68,7 @@ namespace PromactManagment.Test.CompanyRegistration
         public async Task CreateCompanyTest()
         {
             //Arrange
-            CompanyModelDTO company = new CompanyModelDTO()
+            CompanyDTO company = new CompanyDTO()
             {
                 ComapnyId = 1,
                 CompanyName = "Bhushan",
@@ -82,7 +82,7 @@ namespace PromactManagment.Test.CompanyRegistration
                 URLLinke = "htttp://www.google.com",
             };
             //Art
-            _companyRegistration.Setup(x => x.CreateCompanyAsync(It.IsAny<CompanyModelDTO>())).ReturnsAsync(company);
+            _companyRegistration.Setup(x => x.CreateCompanyAsync(It.IsAny<CompanyDTO>())).ReturnsAsync(company);
             var companyData = await _companyRegistrationController.AddCompanyDetailAsync(company);
             //Assert
             var viewResult = Assert.IsType<OkObjectResult>(companyData);
@@ -95,7 +95,7 @@ namespace PromactManagment.Test.CompanyRegistration
         public async Task UpdateCompanyTest()
         {
             //Arrange
-            CompanyModelDTO company = new CompanyModelDTO()
+            CompanyDTO company = new CompanyDTO()
             {
                 ComapnyId = 1,
                 CompanyName = "Jio",
@@ -109,7 +109,7 @@ namespace PromactManagment.Test.CompanyRegistration
                 URLLinke = "htttp://www.google.com",
             };
             //Art
-            _companyRegistration.Setup(x => x.UpdateCompanyDetailAsync(It.IsAny<CompanyModelDTO>())).ReturnsAsync(company);
+            _companyRegistration.Setup(x => x.UpdateCompanyDetailAsync(It.IsAny<CompanyDTO>())).ReturnsAsync(company);
              
             var result = await _companyRegistrationController.UpdateCompanyAsync(company);
             //Assert
@@ -124,9 +124,9 @@ namespace PromactManagment.Test.CompanyRegistration
         /// Create company detail. 
         /// </summary>
         /// <returns>Return CompanyDetail object </returns>
-        private CompanyModelDTO GetCompanyData()
+        private CompanyDTO GetCompanyData()
         {
-            var CompanyDetail = new CompanyModelDTO();
+            var CompanyDetail = new CompanyDTO();
 
             CompanyDetail.ComapnyId = 1;
             CompanyDetail.CompanyName = "Bhushan";
