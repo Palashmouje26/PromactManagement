@@ -16,23 +16,22 @@ namespace PromactManagement.Web.Controllers
         #endregion
 
         #region Constructor
-        public CompanyRegistrationController(ICompanyRepository companyModuleRegistration)
+        public CompanyRegistrationController(ICompanyRepository company)
         {
-            _companyRegistration = companyModuleRegistration;
+            _companyRegistration = company;
         }
         #endregion
 
         #region public Methods
 
         /**
-        * @api {get} /api/CompanyRegistrationController /:get all company information
+        * @api {get} /api/Company /:get all company information
         * @apiName GetCompanyDetailAsync
-        * @apiGroup CompanyModelRegistration
+        * @apiGroup Company
         * 
         * @apiSuccess : List Of registerd company details.
         * 
         * @apiSuccessExample Success-Response:{object[]}   
-        * @apiError ComanyNotFound The information of the company was not found.
         */
         [HttpGet("company")]
         public async Task<IActionResult> GetCompanyDetailAsync()
@@ -41,9 +40,9 @@ namespace PromactManagement.Web.Controllers
         }
 
         /**
-        * @api {get} /api/CompanyRegistrationController /:id get one particuler company information
+        * @api {get} /api/Company/:id get one particuler company information
         * @apiName GetComanyByIDAsync
-        * @apiGroup CompanyModelRegistration
+        * @apiGroup Company
         *    
         * @apiParam {Number}  Id of the company.
         * 
@@ -54,19 +53,10 @@ namespace PromactManagement.Web.Controllers
         {
             return Ok(await _companyRegistration.GetCompanyDetailByIdAsync(Id));
         }
-
         /**
-        * @api {post} /CompanyModelRegistration/
-        * @apiBody {String} companyName           Mandatory Firstname of the company.
-        * @apiBody {String} CompanyOwnerEmailId   Mandatory  input with small letter"Xyz@xxx.com".
-        * @apiBody {String} CompanyStatus         Mandatory nested status object.
-        * 
-        * @apiSuccessExample Success-Response:
-        *  { 
-        *      organizationName = "John",
-        *      OrganizationOwnerEmailId =  "Xyz@abc.com"
-        *  }
-        * @apiError return StatusCode.
+        *   @api {post} api/company/add company Method to add company detail.
+        *   
+        *   @apiBody {object} company detail.
         */
         [HttpPost("companycreate")]
         public async Task<IActionResult> AddCompanyDetailAsync([FromBody] CompanyDTO company)
@@ -81,9 +71,9 @@ namespace PromactManagement.Web.Controllers
             return Ok("Company Created Successfully");
         }
         /**
-        * @api {put} /CompanyRegistrationController/ Modify company information
+        * @api {put} /Company/ Modify company information
         * @apiName UpdateCompanyAsync
-        * @apiGroup CompanyModelRegistration
+        * @apiGroup Company
         *
         * @apiParam :{object[]} 
         * 

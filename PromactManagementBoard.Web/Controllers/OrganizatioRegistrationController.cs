@@ -59,7 +59,7 @@ namespace PromactManagement.Web.Controllers
         *   @apiBody {object} organization detail.
         */
         [HttpPost("createorganization")]
-        public async Task<IActionResult> AddOrganizationAsync([FromForm] OrganizationDTO organization)
+        public async Task<IActionResult> CreateOrganizationAsync([FromForm] OrganizationDTO organization)
         {
 
             var result = await _organizationModule.CreateOrganizationAsync(organization);
@@ -71,7 +71,7 @@ namespace PromactManagement.Web.Controllers
             return Ok("Created Successfully");
         }
 
-        /**
+      /**
       * @api {put} /Organization/ Modify Organization information.
       * @apiName UpdateOrganizationAsync.
       * @apiGroup Organization.
