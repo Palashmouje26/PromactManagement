@@ -68,11 +68,11 @@ namespace PromactManagement.Repository.OrganizationRegistration
         /// Show all registerd Organization list.
         /// </summary>
         /// <returns> List of all organization registerd with details.</returns>
-        public async Task<List<OrganizationListDto>> GetAllOrganizationDetailAsync()
+        public async Task<List<OrganizationListDTO>> GetAllOrganizationDetailAsync()
         {
             var organizationDetail = await _dataRepository.Where<OrganizationModel>(x => x.ActiveCompany == 0).AsNoTracking().ToListAsync();
 
-            return _mapper.Map<List<OrganizationModel>, List<OrganizationListDto>>(organizationDetail);
+            return _mapper.Map<List<OrganizationModel>, List<OrganizationListDTO>>(organizationDetail);
         }
 
         /// <summary>
@@ -80,10 +80,10 @@ namespace PromactManagement.Repository.OrganizationRegistration
         /// </summary>
         /// <param name="Id">Id is used for particuller Organization detail find.</param>
         /// <returns>Showing of partucular organization regiterd  with details.</returns>
-        public async Task<OrganizationListDto> GetOrganizationDetailByIdAsync(int Id)
+        public async Task<OrganizationListDTO> GetOrganizationDetailByIdAsync(int Id)
         {
             var organizationDetail = await _dataRepository.FirstAsync<OrganizationModel>(a => a.OrganizationId == Id);
-            var response = _mapper.Map<OrganizationListDto>(organizationDetail);
+            var response = _mapper.Map<OrganizationListDTO>(organizationDetail);
             var totalActiveCompany = await _dataRepository.CountAsync<OrganizationModel>(x => x.OrganizationId == Id && x.ActiveCompany == 0);//count of active comapany show.
             response.ActiveCompany = totalActiveCompany;
             return response;

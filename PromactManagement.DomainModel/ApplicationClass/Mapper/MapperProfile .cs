@@ -13,8 +13,8 @@ namespace PromactManagement.DomainModel.ApplicationClass.Mapper
         {
             CreateMap<OrganizationDTO, OrganizationModel>().ReverseMap();
             CreateMap<OrganizationModel, OrganizationDTO>().ReverseMap();
-            CreateMap<OrganizationListDto, OrganizationModel>().ReverseMap();
-            CreateMap<OrganizationModel, OrganizationListDto>().ReverseMap();
+            CreateMap<OrganizationListDTO, OrganizationModel>().ReverseMap();
+            CreateMap<OrganizationModel, OrganizationListDTO>().ReverseMap();
             CreateMap<CompanyDTO, CompanyModelRegistration>().ReverseMap();
             CreateMap<CompanyModelRegistration, CompanyDTO>().ReverseMap();
         }

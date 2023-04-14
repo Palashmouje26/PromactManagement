@@ -24,7 +24,6 @@ namespace PromactManagment.Test.OrganizationRegistration
         #endregion
 
         #region Constructor
-
         public OrganizationRegistrationRepositoryTest()
         {
             _organizationModule = new Mock<IOrganizationRegistration>();
@@ -41,12 +40,12 @@ namespace PromactManagment.Test.OrganizationRegistration
         public async Task GetAllOrganizationDetailTest()
         {
             //Arrange
-            _organizationModule.Setup(x => x.GetAllOrganizationDetailAsync()).ReturnsAsync(new List<OrganizationListDto>() { new OrganizationListDto(), new OrganizationListDto() });
+            _organizationModule.Setup(x => x.GetAllOrganizationDetailAsync()).ReturnsAsync(new List<OrganizationListDTO>() { new OrganizationListDTO(), new OrganizationListDTO() });
             //Art
             var result = await _organizationController.GetOrganizationAsync();
             //Assert
             var viewResult = Assert.IsType<OkObjectResult>(result);
-            var organization = Assert.IsType<List<OrganizationListDto>>(viewResult.Value);
+            var organization = Assert.IsType<List<OrganizationListDTO>>(viewResult.Value);
             Assert.Equal(2, organization.Count);
         }
 
@@ -91,7 +90,7 @@ namespace PromactManagment.Test.OrganizationRegistration
 
             _organizationModule.Setup(x => x.CreateOrganizationAsync(It.IsAny<OrganizationDTO>())).ReturnsAsync(organizations);
 
-            var organizationData = await _organizationController.AddOrganizationAsync(organizations);
+            var organizationData = await _organizationController.CreateOrganizationAsync(organizations);
            
             var viewResult = Assert.IsType<OkObjectResult>(organizationData);
 
@@ -135,14 +134,14 @@ namespace PromactManagment.Test.OrganizationRegistration
         /// Create organization detail. 
         /// </summary>
         /// <returns>Return organizationDetail object </returns>
-        private OrganizationListDto GetOrganizationData()
+        private OrganizationListDTO GetOrganizationData()
         {
-            var organizationDetail = new OrganizationListDto();
+            var organizationDetail = new OrganizationListDTO();
 
             organizationDetail.OrganizationId = 3;
             organizationDetail.OrganizationName = "RRRR";
             organizationDetail.OrganizationOwnerEmailId = "RRR@gmail.com";
-            organizationDetail.PartnerLevel = "Partner";
+            organizationDetail.PartnerLevel = "Silver";
             organizationDetail.ActiveCompany = 1;
             organizationDetail.OrganizationStatus = false;
             organizationDetail.OrganizationType = "Partner";

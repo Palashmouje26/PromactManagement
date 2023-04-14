@@ -18,14 +18,14 @@ namespace PromactManagement.Repository.OrganizationModuleRegistration
         /// Fetch the All Organization details.
         /// </summary>
         /// <returns>Fetch the details from the database</returns>
-        Task<List<OrganizationListDto>> GetAllOrganizationDetailAsync();
+        Task<List<OrganizationListDTO>> GetAllOrganizationDetailAsync();
 
         /// <summary>
         /// Fetch the organization details with  Id.
         /// </summary>
         /// <param name="Id">Get perticlar organization deatails by Id</param>
         /// <returns> Fetch the details from the database</returns>
-        Task<OrganizationListDto> GetOrganizationDetailByIdAsync(int Id);
+        Task<OrganizationListDTO> GetOrganizationDetailByIdAsync(int Id);
 
         /// <summary>
         /// Updating the organization details.
